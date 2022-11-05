@@ -2,81 +2,80 @@
 
 const config = {
   github: {
-    username: 'arifszn', // Your GitHub org/user name. (Required)
+    username: 'babbaranish', // Your GitHub org/user name. (Required)
     sortBy: 'stars', // stars | updated
-    limit: 10, // How many projects to display.
+    limit: 20, // How many projects to display.
     exclude: {
       forks: false, // Forked projects will not be displayed if set to true.
-      projects: [], // These projects will not be displayed. example: ['my-project1', 'my-project2']
+      projects: ['babbaranish', 'test', 'protfolio_new'], // These projects will not be displayed. example: ['my-project1', 'my-project2']
     },
   },
   social: {
-    linkedin: 'ariful-alam',
-    twitter: 'arif_szn',
+    linkedin: 'babbaranish',
+    twitter: 'anish_____b',
     facebook: '',
-    instagram: '',
-    dribbble: '',
+    instagram: 'babbar_anish',
+    dribbble: 'babbaranish',
     behance: '',
-    medium: 'arifszn',
-    dev: 'arifszn',
-    stackoverflow: '', // format: userid/username
-    website: 'https://arifszn.github.io',
-    phone: '',
-    email: 'arifulalamszn@gmail.com',
+    medium: '',
+    dev: 'babbaranish',
+    stackoverflow: '11876783/babbaranish', // format: userid/username
+    website: 'https://babbaranish.github.io',
+    phone: '+91-95699-22968',
+    email: 'anishbabbar1@gmail.com',
   },
   resume: {
     fileUrl: 'resume.pdf', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
-    'PHP',
-    'Laravel',
+    'HTML5',
+    'CSS3',
     'JavaScript',
     'React.js',
     'Node.js',
-    'Nest.js',
+    'React Native',
     'MySQL',
-    'PostgreSQL',
+    'MongoDB',
     'Git',
-    'Docker',
-    'PHPUnit',
-    'CSS',
-    'Antd',
-    'Tailwind',
+    'Github',
+    'Styled Components',
+    'Redux',
+    'Express.js',
+    'Bootstrap',
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
+      company: 'Infosys',
+      position: 'Operation Executive',
+      from: 'May 2021',
       to: 'Present',
-      companyLink: 'https://example.com',
-    },
-    {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      companyLink: 'https://infosys.com',
     },
   ],
   education: [
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2015',
-      to: '2019',
+      institution: 'DAV College',
+      degree: 'Bachelor of Computer Applications',
+      from: '2017',
+      to: '2020',
     },
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2012',
-      to: '2014',
+      institution: 'Gov. Sen. Sec. School (Boys)',
+      degree: 'Senior Secondary',
+      from: '2016',
+      to: '2017',
+    },
+    {
+      institution: 'Swami Keshwanand Senior Secondary School',
+      degree: 'Matriculation',
+      from: '2014',
+      to: '2015',
     },
   ],
   // Display blog posts from your medium or dev account. (Optional)
   blog: {
-    source: 'dev', // medium | dev
-    username: 'arifszn', // to hide blog section, keep it empty
+    source: '', // medium | dev
+    username: '', // to hide blog section, keep it empty
     limit: 3, // How many posts to display. Max is 10.
   },
   googleAnalytics: {
@@ -88,7 +87,7 @@ const config = {
     snippetVersion: 6,
   },
   themeConfig: {
-    defaultTheme: 'business',
+    defaultTheme: 'dark',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode

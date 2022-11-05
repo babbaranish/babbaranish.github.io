@@ -79,9 +79,8 @@ const GitProfile = ({ config }) => {
           excludeRepo += `+-repo:${sanitizedConfig.github.username}/${project}`;
         });
 
-        let query = `user:${
-          sanitizedConfig.github.username
-        }+fork:${!sanitizedConfig.github.exclude.forks}${excludeRepo}`;
+        let query = `user:${sanitizedConfig.github.username
+          }+fork:${!sanitizedConfig.github.exclude.forks}${excludeRepo}`;
 
         let url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.github.sortBy}&per_page=${sanitizedConfig.github.limit}&type=Repositories`;
 
@@ -169,16 +168,7 @@ const GitProfile = ({ config }) => {
                         avatarRing={!sanitizedConfig.themeConfig.hideAvatarRing}
                         resume={sanitizedConfig.resume}
                       />
-                      <Details
-                        profile={profile}
-                        loading={loading}
-                        github={sanitizedConfig.github}
-                        social={sanitizedConfig.social}
-                      />
-                      <Skill
-                        loading={loading}
-                        skills={sanitizedConfig.skills}
-                      />
+
                       <Experience
                         loading={loading}
                         experiences={sanitizedConfig.experiences}
@@ -186,6 +176,16 @@ const GitProfile = ({ config }) => {
                       <Education
                         loading={loading}
                         education={sanitizedConfig.education}
+                      />
+                      <Skill
+                        loading={loading}
+                        skills={sanitizedConfig.skills}
+                      />
+                      <Details
+                        profile={profile}
+                        loading={loading}
+                        github={sanitizedConfig.github}
+                        social={sanitizedConfig.social}
                       />
                     </div>
                   </div>
