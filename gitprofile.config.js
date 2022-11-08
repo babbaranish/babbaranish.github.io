@@ -60,7 +60,7 @@ const config = {
       to: '2020',
     },
     {
-      institution: 'Gov. Sen. Sec. School (Boys)',
+      institution: 'Govt. Sen. Sec. School (Boys)',
       degree: 'Senior Secondary',
       from: '2016',
       to: '2017',
