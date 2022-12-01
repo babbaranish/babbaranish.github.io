@@ -37,6 +37,8 @@ const config = {
     'MySQL',
     'MongoDB',
     'Git',
+    'AWS',
+    'Fundamentals of Linux',
     'Github',
     'Styled Components',
     'Redux',
@@ -46,7 +48,7 @@ const config = {
   experiences: [
     {
       company: 'Infosys',
-      position: 'Operation Executive',
+      position: 'Operations Executive',
       from: 'May 2021',
       to: 'Present',
       companyLink: 'https://infosys.com',
@@ -55,7 +57,7 @@ const config = {
   education: [
     {
       institution: 'DAV College',
-      degree: 'Bachelor of Computer Applications',
+      degree: 'Bachelors of Computer Applications',
       from: '2017',
       to: '2020',
     },
