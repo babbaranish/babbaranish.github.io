@@ -18,7 +18,7 @@ export default function About() {
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        className="flex items-center gap-3 mb-16"
+        className="flex items-center gap-3 mb-6"
       >
         <div className="h-[1px] w-8" style={{ background: "var(--accent)" }} />
         <span
@@ -35,7 +35,7 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.4] font-medium tracking-[-0.015em] max-w-4xl"
+        className="text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.4] font-medium tracking-[-0.015em] max-w-6xl"
         style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
       >
         I build products that{" "}
@@ -49,7 +49,7 @@ export default function About() {
       </motion.p>
 
       {/* Stats grid */}
-      <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
