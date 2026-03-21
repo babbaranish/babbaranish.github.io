@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 import { Code2, Users, Rocket, Zap } from "lucide-react";
 
 const stats = [
-  { value: "5+", label: "Years Experience", icon: Code2 },
-  { value: "10+", label: "Team Members", icon: Users },
-  { value: "15K+", label: "Payments Processed", icon: Rocket },
-  { value: "500+", label: "Daily Users", icon: Zap },
+  { value: "5+", label: "Years Building Web & Mobile Apps", icon: Code2 },
+  { value: "10+", label: "Developers Managed as Team Lead", icon: Users },
+  { value: "5+", label: "Products Shipped to Production", icon: Rocket },
+  { value: "1000+", label: "Users Across Internal Tools", icon: Zap },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="px-6 md:px-16 lg:px-24 py-16">
+    <section id="about" className="px-6 md:px-16 lg:px-24 py-10">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}

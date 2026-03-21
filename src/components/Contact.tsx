@@ -13,7 +13,7 @@ const links = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="px-6 md:px-16 lg:px-24 py-16">
+    <section id="contact" className="px-6 md:px-16 lg:px-24 py-10">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -46,14 +46,14 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="text-[16px] leading-[1.7] max-w-lg mb-12"
+        className="text-[16px] leading-[1.7] max-w-lg mb-8"
         style={{ color: "var(--text-muted)" }}
       >
         Got a project in mind or want to chat? I&apos;m always open to new opportunities and collaborations.
       </motion.p>
 
       {/* Contact grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
         {links.map(({ icon: Icon, label, value, href }, i) => {
           const inner = (
             <motion.div
@@ -112,11 +112,11 @@ export default function Contact() {
         className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4"
         style={{ borderTop: "1px solid var(--border)" }}
       >
-        <p className="text-[12px]" style={{ color: "var(--text-faint)" }}>
-          © 2025 Anish Babbar
+        <p className="text-[13px]" style={{ color: "var(--text-secondary)" }}>
+          © 2026 Anish Babbar
         </p>
-        <p className="text-[12px]" style={{ color: "var(--text-faint)", fontFamily: "var(--font-mono)" }}>
-          Built with Next.js + Framer Motion
+        <p className="text-[13px]" style={{ color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>
+          Designed & Built by Anish
         </p>
       </div>
     </section>

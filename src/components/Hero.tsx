@@ -16,7 +16,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 md:px-16 lg:px-24">
+    <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden px-6 md:px-16 lg:px-24">
       {/* Spotlights */}
       <div
         className="absolute top-[20%] right-[20%] w-[600px] h-[600px] rounded-full pointer-events-none"

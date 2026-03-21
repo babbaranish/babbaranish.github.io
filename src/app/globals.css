@@ -42,15 +42,15 @@
 
 [data-theme="dark"] {
   --bg: #151519;
-  --bg-elevated: #1c1c22;
-  --bg-card: #1e1e25;
-  --bg-subtle: #1a1a20;
-  --border: #28282f;
-  --border-hover: #38383f;
-  --text-primary: #e8e8ec;
-  --text-secondary: #94949e;
-  --text-muted: #64646e;
-  --text-faint: #3a3a42;
+  --bg-elevated: #1e1e24;
+  --bg-card: #212128;
+  --bg-subtle: #1c1c22;
+  --border: #30303a;
+  --border-hover: #42424c;
+  --text-primary: #f0f0f4;
+  --text-secondary: #b0b0ba;
+  --text-muted: #8a8a96;
+  --text-faint: #52525e;
   --accent: #ff6b35;
   --accent-soft: rgba(255, 107, 53, 0.06);
   --accent-medium: rgba(255, 107, 53, 0.12);

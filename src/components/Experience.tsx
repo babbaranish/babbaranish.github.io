@@ -35,7 +35,7 @@ const companies: Company[] = [
       {
         title: "Software Developer",
         date: "Aug 2023 — Jul 2025",
-        metric: { value: "15K+", label: "Payments" },
+        metric: { value: "95%", label: "Digital Adoption" },
         highlights: [
           "Built Orbit — unified task, finance, inventory & travel platform",
           "95% digital payment adoption across the organization",
@@ -73,7 +73,7 @@ const companies: Company[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 md:px-16 lg:px-24 py-16">
+    <section id="experience" className="px-6 md:px-16 lg:px-24 py-10">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
