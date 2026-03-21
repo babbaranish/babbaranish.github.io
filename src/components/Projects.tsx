@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 
 interface Project {
   title: string;
@@ -9,6 +9,7 @@ interface Project {
   description: string;
   accent: string;
   url: string;
+  liveUrl?: string;
 }
 
 const projects: Project[] = [
@@ -19,6 +20,7 @@ const projects: Project[] = [
       "B2B services website for manpower solutions and digital growth — featuring recruitment services, digital marketing, lead generation, and business consultation with modern animations.",
     accent: "#ff6b35",
     url: "https://github.com/babbaranish/kieyverse",
+    liveUrl: "https://www.kieyverse.in/",
   },
   {
     title: "Reaux Labs Backend",
@@ -70,11 +72,8 @@ export default function Projects() {
       {/* Cards grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {projects.map((project, i) => (
-          <motion.a
+          <motion.div
             key={project.title}
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -117,19 +116,44 @@ export default function Projects() {
                 >
                   {project.title}
                 </h3>
-                <div className="flex items-center gap-2">
-                  <Github
-                    size={16}
-                    strokeWidth={1.5}
+                <div className="flex items-center gap-3">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-300 hover:scale-105"
+                      style={{
+                        background: "var(--accent-soft)",
+                        color: "var(--accent)",
+                        border: "1px solid var(--border)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "var(--accent-medium)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "var(--accent-soft)";
+                      }}
+                    >
+                      <ExternalLink size={12} strokeWidth={1.5} />
+                      Live
+                    </a>
+                  )}
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="transition-colors duration-300"
                     style={{ color: "var(--text-faint)" }}
-                  />
-                  <ArrowUpRight
-                    size={16}
-                    strokeWidth={1.5}
-                    className="opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    style={{ color: "var(--accent)" }}
-                  />
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "var(--text-primary)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "var(--text-faint)";
+                    }}
+                  >
+                    <Github size={16} strokeWidth={1.5} />
+                  </a>
                 </div>
               </div>
 
@@ -158,7 +182,7 @@ export default function Projects() {
                 {project.description}
               </p>
             </div>
-          </motion.a>
+          </motion.div>
         ))}
       </div>
     </section>
