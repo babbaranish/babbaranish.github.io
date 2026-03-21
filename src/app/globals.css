@@ -132,3 +132,62 @@ body {
   0% { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(2.5); opacity: 0; }
 }
+
+/* ── Hover utility classes ── */
+
+.hover-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.hover-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-card-no-shadow {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-card-no-shadow:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-role {
+  transition: background-color 0.3s ease;
+}
+.hover-role:hover {
+  background-color: var(--accent-soft);
+}
+
+.hover-link-primary {
+  transition: color 0.3s ease;
+}
+.hover-link-primary:hover {
+  color: var(--text-primary);
+}
+
+.hover-btn-accent {
+  transition: background-color 0.3s ease;
+}
+.hover-btn-accent:hover {
+  background-color: var(--accent-medium);
+}
+
+/* Skill tag hover variants — use CSS custom properties set inline */
+.hover-skill-tag {
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.hover-skill-tag:hover {
+  color: var(--tag-hover-color);
+  border-color: var(--tag-hover-color);
+  background-color: var(--tag-hover-bg);
+}
+
+/* Skill card glow — uses custom property set inline */
+.hover-glow {
+  transition: box-shadow 0.5s ease;
+}
+.hover-glow:hover {
+  box-shadow: var(--glow-shadow);
+}

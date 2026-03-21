@@ -78,19 +78,10 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02]"
+            className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover-card"
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
-              boxShadow: "var(--shadow-sm)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--border-hover)";
-              e.currentTarget.style.boxShadow = "var(--shadow-md)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.boxShadow = "var(--shadow-sm)";
             }}
           >
             {/* Top accent line */}
@@ -122,17 +113,11 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-300 hover:scale-105"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-300 hover:scale-105 hover-btn-accent"
                       style={{
                         background: "var(--accent-soft)",
                         color: "var(--accent)",
                         border: "1px solid var(--border)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "var(--accent-medium)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "var(--accent-soft)";
                       }}
                     >
                       <ExternalLink size={12} strokeWidth={1.5} />
@@ -143,14 +128,8 @@ export default function Projects() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors duration-300"
+                    className="hover-link-primary"
                     style={{ color: "var(--text-faint)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "var(--text-faint)";
-                    }}
                   >
                     <Github size={16} strokeWidth={1.5} />
                   </a>

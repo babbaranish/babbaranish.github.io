@@ -59,19 +59,10 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative p-6 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02]"
+              className="group relative p-6 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover-card"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
-                boxShadow: "var(--shadow-sm)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-hover)";
-                e.currentTarget.style.boxShadow = "var(--shadow-md)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.boxShadow = "var(--shadow-sm)";
               }}
             >
               <Icon

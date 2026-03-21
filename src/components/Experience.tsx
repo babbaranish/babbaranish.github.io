@@ -146,15 +146,9 @@ export default function Experience() {
               {company.roles.map((role, ri) => (
                 <div
                   key={role.title}
-                  className="group px-6 md:px-8 py-6 transition-colors duration-300"
+                  className="group px-6 md:px-8 py-6 hover-role"
                   style={{
                     borderBottom: ri < company.roles.length - 1 ? "1px dashed var(--border)" : "none",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "var(--accent-soft)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
                   }}
                 >
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">

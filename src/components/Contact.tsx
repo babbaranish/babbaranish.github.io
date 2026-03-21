@@ -61,18 +61,10 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06, duration: 0.4 }}
-              className="group flex items-center gap-4 p-5 rounded-xl transition-all duration-300"
+              className="group flex items-center gap-4 p-5 rounded-xl hover-card-no-shadow"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-hover)";
-                e.currentTarget.style.boxShadow = "var(--shadow-md)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.boxShadow = "none";
               }}
             >
               <div

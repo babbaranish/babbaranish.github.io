@@ -138,17 +138,12 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: ci * 0.1, duration: 0.6 }}
-            className={`${card.colSpan} group relative overflow-hidden p-7 rounded-2xl transition-all duration-500`}
+            className={`${card.colSpan} group relative overflow-hidden p-7 rounded-2xl hover-glow`}
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = `0 0 30px -5px ${card.glowColor.replace("0.08", "0.15").replace("0.06", "0.12")}`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "none";
-            }}
+              "--glow-shadow": `0 0 30px -5px ${card.glowColor.replace("0.08", "0.15").replace("0.06", "0.12")}`,
+            } as React.CSSProperties}
           >
             {/* Hover glow */}
             <div
@@ -191,23 +186,15 @@ export default function Skills() {
                 {card.tags.map((t) => (
                   <span
                     key={t.name}
-                    className="flex items-center gap-1.5 text-[10px] uppercase tracking-[1.5px] py-1.5 px-3 rounded-md cursor-default transition-all duration-200"
+                    className="flex items-center gap-1.5 text-[10px] uppercase tracking-[1.5px] py-1.5 px-3 rounded-md cursor-default hover-skill-tag"
                     style={{
                       fontFamily: "var(--font-mono)",
                       background: card.tagStyle?.bg || "var(--bg-subtle)",
                       color: card.tagStyle?.color || "var(--text-muted)",
                       border: `1px solid ${card.tagStyle?.border || "var(--border)"}`,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = card.hoverColor;
-                      e.currentTarget.style.borderColor = card.hoverColor;
-                      e.currentTarget.style.background = `${card.hoverColor}10`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = card.tagStyle?.color || "var(--text-muted)";
-                      e.currentTarget.style.borderColor = card.tagStyle?.border || "var(--border)";
-                      e.currentTarget.style.background = card.tagStyle?.bg || "var(--bg-subtle)";
-                    }}
+                      "--tag-hover-color": card.hoverColor,
+                      "--tag-hover-bg": `${card.hoverColor}10`,
+                    } as React.CSSProperties}
                   >
                     {t.icon}
                     {t.name}
