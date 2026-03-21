@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowDown, Sparkles } from "lucide-react";
+import HeroVisual from "./HeroVisual";
 
 const roles = ["Team Lead", "Full-Stack Dev", "React Expert", "Builder"];
 
@@ -32,12 +33,14 @@ export default function Hero() {
         }}
       />
 
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center w-full">
+      <div className="flex flex-col">
       {/* Status badge */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="mb-8 flex items-center gap-3 w-fit px-4 py-2 rounded-full"
+        className="mb-5 flex items-center gap-3 w-fit px-4 py-2 rounded-full"
         style={{
           background: "var(--accent-soft)",
           border: "1px solid var(--border)",
@@ -61,7 +64,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[clamp(3.5rem,11vw,10rem)] font-extrabold leading-[0.88] tracking-[-0.04em]"
+          className="text-[clamp(4rem,12vw,10rem)] font-extrabold leading-[0.92] tracking-[-0.04em]"
           style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
         >
           Anish
@@ -70,7 +73,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[clamp(3.5rem,11vw,10rem)] font-extrabold leading-[0.88] tracking-[-0.04em]"
+          className="text-[clamp(4rem,12vw,10rem)] font-extrabold leading-[0.92] tracking-[-0.04em]"
           style={{
             fontFamily: "var(--font-display)",
             background: "linear-gradient(135deg, #ff6b35, #ff8f65, #ff6b35)",
@@ -87,7 +90,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.7 }}
-        className="mt-10 max-w-xl"
+        className="mt-6 max-w-xl"
       >
         <div className="flex items-center gap-4 mb-5">
           <Sparkles size={14} strokeWidth={1.5} style={{ color: "var(--accent)" }} />
@@ -117,7 +120,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="mt-10 flex items-center gap-4"
+        className="mt-8 flex items-center gap-4"
       >
         <a
           href="mailto:anishbabbar1@gmail.com"
@@ -153,6 +156,14 @@ export default function Hero() {
           GitHub →
         </a>
       </motion.div>
+
+      </div>
+
+      {/* Right visual — desktop only */}
+      <div className="hidden lg:block">
+        <HeroVisual />
+      </div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div
