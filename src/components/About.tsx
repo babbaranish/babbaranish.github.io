@@ -12,7 +12,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="px-6 md:px-16 lg:px-24 py-28">
+    <section id="about" className="px-6 md:px-16 lg:px-24 py-16">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}

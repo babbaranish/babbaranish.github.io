@@ -13,7 +13,7 @@ const links = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="px-6 md:px-16 lg:px-24 py-28">
+    <section id="contact" className="px-6 md:px-16 lg:px-24 py-16">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -34,7 +34,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.15] tracking-[-0.03em] mb-4"
+        className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.35] tracking-[-0.03em] mb-4"
         style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
       >
         Let&apos;s build something{" "}

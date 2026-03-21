@@ -73,7 +73,7 @@ const companies: Company[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 md:px-16 lg:px-24 py-28">
+    <section id="experience" className="px-6 md:px-16 lg:px-24 py-16">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -94,7 +94,7 @@ export default function Experience() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.15] tracking-[-0.03em] mb-16"
+        className="text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.35] tracking-[-0.03em] mb-16"
         style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
       >
         Where I&apos;ve{" "}
