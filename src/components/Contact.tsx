@@ -34,8 +34,8 @@ export default function Contact() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.35] tracking-[-0.03em] mb-4"
-        style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
+        className="text-[clamp(2rem,5vw,4rem)] font-bold tracking-[-0.03em] mb-4"
+        style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)", lineHeight: 1.6 }}
       >
         Let&apos;s build something{" "}
         <span style={{ color: "var(--accent)" }}>great</span>

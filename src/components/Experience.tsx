@@ -94,8 +94,8 @@ export default function Experience() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.35] tracking-[-0.03em] mb-16"
-        style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
+        className="text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-[-0.03em] mb-16"
+        style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)", lineHeight: 1.6 }}
       >
         Where I&apos;ve{" "}
         <span style={{ color: "var(--accent)" }}>built things</span>
