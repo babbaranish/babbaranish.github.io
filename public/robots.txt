@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://babbaranish.github.io/new_portfolio/sitemap.xml
+Sitemap: https://anishbabbar.me/sitemap.xml

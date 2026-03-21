@@ -7,7 +7,7 @@ const JSONLD = JSON.stringify({
   "@type": "Person",
   name: "Anish Babbar",
   jobTitle: "Team Lead & Full-Stack Developer",
-  url: "https://babbaranish.github.io/new_portfolio",
+  url: "https://anishbabbar.me",
   email: "anishbabbar1@gmail.com",
   address: {
     "@type": "PostalAddress",

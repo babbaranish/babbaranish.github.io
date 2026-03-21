@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://babbaranish.github.io/new_portfolio";
+const siteUrl = "https://anishbabbar.me";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
