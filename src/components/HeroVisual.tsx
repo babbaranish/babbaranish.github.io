@@ -116,33 +116,40 @@ export default function HeroVisual() {
             <span className="text-accent">$</span> <span className="text-fg">{COMMAND.slice(0, chars)}</span>
             {commandLive && <span className="caret" />}
           </p>
-          {showWorking && (
-            <p>
-              <span className="text-accent">{SPINNER[spinFrame]}</span>
-              <span className="text-fg-muted"> reading history</span>
-            </p>
-          )}
-          <ol className="mt-2">
-            {items.slice(0, rowCount).map((item) => (
-              <motion.li
-                key={item.name}
-                className="grid grid-cols-[64px_minmax(0,1fr)] gap-3"
-                initial={reduce ? false : { opacity: 0, x: -4 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, ease: EASE }}
-              >
-                <span className="tok-n tabular-nums">{item.when}</span>
-                <span>
-                  <span className="tok-f">{item.name}</span> <span className="text-fg-secondary">{item.detail}</span>
-                </span>
-              </motion.li>
-            ))}
-          </ol>
-          {showPrompt && (
-            <p className="mt-2">
-              <span className="text-accent">$</span> <span className="caret" />
-            </p>
-          )}
+          {/* All rows stay mounted so the panel height is fixed from the first render */}
+          <div className="relative mt-2">
+            {/* Spinner overlays the first row's line; that row is still hidden while working */}
+            {showWorking && (
+              <p className="absolute inset-x-0 top-0">
+                <span className="text-accent">{SPINNER[spinFrame]}</span>
+                <span className="text-fg-muted"> reading history</span>
+              </p>
+            )}
+            <ol>
+              {items.map((item, i) => {
+                const shown = i < rowCount;
+                return (
+                  <motion.li
+                    key={item.name}
+                    className="grid grid-cols-[64px_minmax(0,1fr)] gap-3"
+                    initial={false}
+                    animate={{ opacity: shown ? 1 : 0, x: shown ? 0 : -4 }}
+                    transition={{ duration: 0.2, ease: EASE }}
+                  >
+                    <span className="tok-n tabular-nums">{item.when}</span>
+                    <span>
+                      <span className="tok-f">{item.name}</span>{" "}
+                      <span className="text-fg-secondary">{item.detail}</span>
+                    </span>
+                  </motion.li>
+                );
+              })}
+            </ol>
+          </div>
+          {/* Reserved line for the final prompt; invisible until done */}
+          <p className={`mt-2 h-6${showPrompt ? "" : " invisible"}`}>
+            <span className="text-accent">$</span> {showPrompt && <span className="caret" />}
+          </p>
         </div>
         <div className="sr-only">
           <p>$ {COMMAND}</p>

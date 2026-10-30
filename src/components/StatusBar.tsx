@@ -65,76 +65,78 @@ export default function StatusBar() {
       initial={{ y: 32 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.4, delay: 0.3, ease: EASE }}
-      className="fixed inset-x-0 bottom-0 z-40 flex h-8 items-center justify-between gap-4 border-t border-hairline bg-card px-3 text-[12px] leading-4 text-fg-muted"
+      className="fixed inset-x-0 bottom-0 z-40 min-h-8 border-t border-hairline bg-card pb-[env(safe-area-inset-bottom)] text-[12px] leading-4 text-fg-muted"
     >
-      <div className="flex min-w-0 items-center gap-4">
-        <span className="flex items-center gap-1.5 text-fg-secondary">
-          <GitBranch size={14} strokeWidth={1.5} aria-hidden="true" />
-          main
-        </span>
-        <AnimatePresence mode="wait">
-          {message ? (
-            <motion.span
-              key="message"
-              role="status"
-              aria-live="polite"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6 }}
-              transition={{ duration: 0.15, ease: EASE }}
-              className="flex items-center gap-1.5 text-accent"
-            >
-              <Check size={14} strokeWidth={1.5} aria-hidden="true" />
-              {message}
-            </motion.span>
-          ) : (
-            <motion.span
-              key="problems"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6 }}
-              transition={{ duration: 0.15, ease: EASE }}
-              className="flex items-center gap-2"
-            >
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" />
-              0 problems
-            </motion.span>
-          )}
-        </AnimatePresence>
-        <span className="hidden truncate empty:hidden sm:inline">
+      <div className="flex h-8 items-center justify-between gap-4 px-3">
+        <div className="flex min-w-0 items-center gap-4">
+          <span className="flex items-center gap-1.5 text-fg-secondary">
+            <GitBranch size={14} strokeWidth={1.5} aria-hidden="true" />
+            main
+          </span>
           <AnimatePresence mode="wait">
-            {f && (
+            {message ? (
               <motion.span
-                key={f.id}
+                key="message"
+                role="status"
+                aria-live="polite"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
+                exit={{ opacity: 0, y: 6 }}
                 transition={{ duration: 0.15, ease: EASE }}
-                className="inline-block"
+                className="flex items-center gap-1.5 text-accent"
               >
-                {f.path}
-                <span className="text-fg-secondary">{f.file}</span>
+                <Check size={14} strokeWidth={1.5} aria-hidden="true" />
+                {message}
+              </motion.span>
+            ) : (
+              <motion.span
+                key="problems"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 6 }}
+                transition={{ duration: 0.15, ease: EASE }}
+                className="flex items-center gap-2"
+              >
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" />
+                0 problems
               </motion.span>
             )}
           </AnimatePresence>
-        </span>
-      </div>
+          <span className="hidden truncate empty:hidden sm:inline">
+            <AnimatePresence mode="wait">
+              {f && (
+                <motion.span
+                  key={f.id}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.15, ease: EASE }}
+                  className="inline-block"
+                >
+                  {f.path}
+                  <span className="text-fg-secondary">{f.file}</span>
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </span>
+        </div>
 
-      <div className="flex shrink-0 items-center gap-4">
-        <span className="hidden tabular-nums sm:inline">
-          Ln {cursor.line}, Col {cursor.col}
-        </span>
-        <span className="hidden md:inline">UTF-8</span>
-        <span className="hidden md:inline">TypeScript React</span>
-        <span className="hidden lg:inline">Abohar, Punjab</span>
-        <button
-          type="button"
-          onClick={openPalette}
-          className="flex items-center gap-2 rounded px-2 py-1 text-fg-secondary transition-colors hover:bg-raised hover:text-fg"
-        >
-          Jump to
-          <kbd className="kbd">⌘K</kbd>
-        </button>
+        <div className="flex shrink-0 items-center gap-4">
+          <span className="hidden tabular-nums sm:inline">
+            Ln {cursor.line}, Col {cursor.col}
+          </span>
+          <span className="hidden md:inline">UTF-8</span>
+          <span className="hidden md:inline">TypeScript React</span>
+          <span className="hidden lg:inline">Abohar, Punjab</span>
+          <button
+            type="button"
+            onClick={openPalette}
+            className="flex items-center gap-2 rounded px-2 py-1 text-fg-secondary transition-colors hover:bg-raised hover:text-fg"
+          >
+            Jump to
+            <kbd className="kbd [@media(hover:none)]:hidden">⌘K</kbd>
+          </button>
+        </div>
       </div>
     </motion.footer>
   );

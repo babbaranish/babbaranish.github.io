@@ -29,7 +29,7 @@ const LINKS = [
 ];
 
 const iconButton =
-  "inline-flex h-8 w-8 items-center justify-center rounded-md text-fg-muted hover:bg-raised hover:text-fg transition-colors";
+  "inline-flex h-10 w-10 items-center justify-center rounded-md text-fg-muted hover:bg-raised hover:text-fg transition-colors";
 
 // Icon by file extension, like an editor's file tree (.ts falls back to FileCode2)
 const EXT_ICONS: [string, LucideIcon][] = [
@@ -235,7 +235,7 @@ export default function Nav() {
           ~/anish
         </a>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => openPalette()}

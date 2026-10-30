@@ -1,0 +1,50 @@
+# Anish Babbar
+
+> Anish Babbar is a full-stack developer and team lead at Masters' Union, where he leads a team of 10+ engineers building internal tools for lead tracking, inventory, payments and travel. He works mostly in React, Node.js and AWS, and is based in Abohar, Punjab, India.
+
+## Profile
+
+- Name: Anish Babbar
+- Role: Full-stack developer and team lead
+- Employer: Masters' Union (Team Lead since July 2025; Software Developer from August 2023 to July 2025)
+- Previous employer: Infosys, Bengaluru (Senior System Associate, January 2023 to August 2023; Operation Executive, August 2021 to January 2023)
+- Location: Abohar, Punjab, India
+- Website: https://anishbabbar.me/
+- GitHub: https://github.com/babbaranish
+- LinkedIn: https://www.linkedin.com/in/babbaranish
+- Email: anishbabbar1@gmail.com
+
+## Experience
+
+### Masters' Union, Team Lead (July 2025 to present)
+- Manages a team of developers across multiple product verticals (10+ engineers)
+- Architected Lead Matrix, a lead capture, tracking and distribution system
+- Built company-wide inventory management with real-time asset tracking
+- Set up an AI-assisted development workflow with Cursor, Claude Code and Copilot
+
+### Masters' Union, Software Developer (August 2023 to July 2025)
+- Built Orbit, one platform for tasks, finance, inventory and travel
+- Drove digital payment adoption to 95% across the organization
+- Published the GetPrepped mentoring app on Google Play
+- Built a travel management system that has handled 1,500+ requests
+
+### Infosys, Senior System Associate (January 2023 to August 2023)
+- Built React and Angular enterprise applications for clients
+- Built a Redux reporting tool for leadership that cut manual work by 40%
+- Built an Angular dashboard for monitoring mainframe job runs
+
+### Infosys, Operation Executive (August 2021 to January 2023)
+- Automated recurring workflows with AutoSys job scheduling
+
+## Skills
+
+- Frontend: React, Next.js, Redux, TypeScript, Tailwind CSS, Framer Motion, JavaScript, Styled Components
+- Backend: Node.js, Express, SQL, MongoDB, AWS, Sequelize, Git
+- Mobile: React Native, Expo, Expo Router
+- AI-assisted development: Cursor IDE, Claude Code, GitHub Copilot, ChatGPT, Claude AI
+
+## Projects
+
+- [Kieyverse](https://www.kieyverse.in/): Marketing site for a B2B services firm covering recruitment, manpower, digital marketing, lead generation and consulting. Stack: Next.js, React 19, Tailwind CSS, Framer Motion. Source: https://github.com/babbaranish/kieyverse
+- [Reaux Labs Backend](https://github.com/babbaranish/reaux-labs-be): API for a multi-gym fitness platform with social feeds, e-commerce, fitness tracking, memberships, admin analytics and push notifications. Stack: Express 5, MongoDB, Zod, JWT, Cloudinary.
+- Reaux Mobile: iOS and Android fitness and shopping app with social feeds, video reels, diet planning, a supplement marketplace and role-based access. Stack: React Native, Expo SDK 54, Zustand, Expo Router.

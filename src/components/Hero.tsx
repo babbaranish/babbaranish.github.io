@@ -27,14 +27,16 @@ function scramble(progress: number) {
     .join("");
 }
 
-// Fade and rise in on load. Reduced motion shows the content at once.
+// Rise in on load (transform only, so the content is in the server HTML and visible at first paint).
+// Reduced motion shows the content at once.
 const enter = (delay: number, reduce: boolean | null) => ({
-  initial: reduce ? false : { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
+  initial: reduce ? false : { y: 12 },
+  animate: { y: 0 },
   transition: { duration: 0.5, delay, ease: EASE },
 });
 
-export default function Hero() {
+// Typing and decode state live here so their 30ms updates don't re-render the rest of Hero.
+function HeroTitle() {
   const [typed, setTyped] = useState(0);
   const [display, setDisplay] = useState(NAME);
   const reduceMotion = useReducedMotion();
@@ -73,6 +75,29 @@ export default function Hero() {
   const shownName = reduceMotion ? NAME : display;
 
   return (
+    <>
+      {/* Prompt */}
+      <p className="text-[13px] text-fg-muted">
+        <span className="text-accent">anish@portfolio</span>:<span className="tok-n">~</span>$ {shown}
+      </p>
+
+      {/* Name */}
+      <h1
+        id="hero-title"
+        aria-label="Anish Babbar"
+        className="mt-4 whitespace-nowrap text-[clamp(32px,9vw,72px)] font-medium leading-[1.05] tracking-[-0.02em] text-fg"
+      >
+        <span aria-hidden="true">{shownName}</span>
+        <span aria-hidden="true" className="caret" />
+      </h1>
+    </>
+  );
+}
+
+export default function Hero() {
+  const reduceMotion = useReducedMotion();
+
+  return (
     <section id="top" aria-labelledby="hero-title" className="file-pane">
       <header className="flex h-10 items-center border-b border-hairline bg-card px-4 sm:px-6">
         <span className="meta">
@@ -81,21 +106,8 @@ export default function Hero() {
       </header>
 
       <div className="grid items-start gap-10 px-4 py-10 sm:px-6 lg:px-10 lg:py-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,460px)] xl:gap-12">
-        <div className="min-w-0">
-          {/* Prompt */}
-          <p className="text-[13px] text-fg-muted">
-            <span className="text-accent">anish@portfolio</span>:<span className="tok-n">~</span>$ {shown}
-          </p>
-
-          {/* Name */}
-          <h1
-            id="hero-title"
-            aria-label="Anish Babbar"
-            className="mt-4 text-[40px] font-medium leading-[1.05] tracking-[-0.02em] text-fg sm:text-[56px] lg:text-[72px]"
-          >
-            <span aria-hidden="true">{shownName}</span>
-            <span aria-hidden="true" className="caret" />
-          </h1>
+        <div className="flex min-w-0 flex-col">
+          <HeroTitle />
 
           <motion.p
             className="prose-text mt-4 max-w-[36rem] text-[16px] leading-[26px]"
@@ -105,7 +117,7 @@ export default function Hero() {
             payments and travel.
           </motion.p>
 
-          <motion.div className="mt-8" {...enter(1.05, reduceMotion)}>
+          <motion.div className="order-3 mt-8 lg:order-2" {...enter(1.05, reduceMotion)}>
             <CodeBlock
               lines={[
                 <>
@@ -145,7 +157,10 @@ export default function Hero() {
           </motion.div>
 
           {/* Actions */}
-          <motion.div className="mt-8 flex flex-wrap items-center gap-3" {...enter(1.2, reduceMotion)}>
+          <motion.div
+            className="order-2 mt-8 flex flex-wrap items-center gap-3 lg:order-3"
+            {...enter(1.2, reduceMotion)}
+          >
             <a className="btn btn-primary group" href="mailto:anishbabbar1@gmail.com">
               <Mail size={16} strokeWidth={1.5} className="transition-transform group-hover:-translate-y-px" />
               Email me
@@ -167,7 +182,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={openPalette}
-              className="meta flex items-center gap-2 transition-colors hover:text-fg"
+              className="meta flex items-center gap-2 transition-colors hover:text-fg [@media(hover:none)]:hidden"
             >
               or press <kbd className="kbd">⌘</kbd>
               <kbd className="kbd">K</kbd>

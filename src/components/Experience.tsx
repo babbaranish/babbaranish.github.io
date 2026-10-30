@@ -1,9 +1,36 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import Section from "./Section";
 import { C } from "./code";
 import { Reveal, CountUp, EASE } from "./motion";
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// "Jul 2025" -> "2025-07", anything else (e.g. "Present") -> undefined
+function toDateTime(label: string): string | undefined {
+  const match = /^([A-Za-z]{3}) (\d{4})$/.exec(label);
+  const month = match ? MONTHS.indexOf(match[1]) + 1 : 0;
+  return match && month > 0 ? `${match[2]}-${String(month).padStart(2, "0")}` : undefined;
+}
+
+// Renders "Jul 2025 – Present" with each date wrapped in <time>; visible text is unchanged
+function RoleDate({ date }: { date: string }) {
+  return (
+    <>
+      {date.split(" – ").map((part, i) => {
+        const dateTime = toDateTime(part);
+        return (
+          <Fragment key={i}>
+            {i > 0 && " – "}
+            {dateTime ? <time dateTime={dateTime}>{part}</time> : part}
+          </Fragment>
+        );
+      })}
+    </>
+  );
+}
 
 interface Role {
   title: string;
@@ -131,7 +158,7 @@ export default function Experience() {
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h4 className="text-[15px] leading-6 font-medium text-accent transition-colors">{r.title}</h4>
-                      <span className="meta transition-colors group-hover:text-fg-secondary">{r.date}</span>
+                      <span className="meta transition-colors group-hover:text-fg-secondary"><RoleDate date={r.date} /></span>
                     </div>
                     <ul className="mt-3 flex flex-col gap-1">
                       {r.highlights.map((h, j) => (

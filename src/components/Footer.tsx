@@ -29,7 +29,7 @@ const footerSections: FooterSection[] = [
     links: [
       { title: "Kieyverse", href: "https://www.kieyverse.in/" },
       { title: "Reaux Labs Backend", href: "https://github.com/babbaranish/reaux-labs-be" },
-      { title: "Reaux Mobile", href: "https://github.com/babbaranish" },
+      { title: "Reaux Mobile", href: "#projects" },
     ],
   },
   {
@@ -60,7 +60,7 @@ export default function Footer() {
                 return (
                   <li key={link.title}>
                     <a
-                      className="link"
+                      className="link inline-block py-1"
                       href={link.href}
                       {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >

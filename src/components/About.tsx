@@ -66,6 +66,15 @@ export default function About() {
             mostly in React, Node.js and AWS.
           </p>
         </Reveal>
+        <Reveal delay={0.12}>
+          <p className="prose-text mt-6 max-w-[40rem] text-[16px] leading-[26px]">
+            I am a full-stack developer and team lead at Masters&apos; Union, where I have worked since{" "}
+            <time dateTime="2023-08">August 2023</time> and now lead a team of 10+ engineers. Before that I
+            spent two years at Infosys (<time dateTime="2021-08">2021</time> to{" "}
+            <time dateTime="2023-08">2023</time>), first in operations and then building React and Angular
+            applications.
+          </p>
+        </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-8 text-[13px] text-fg-muted">
             <K>---</K>

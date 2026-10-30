@@ -16,6 +16,9 @@ const dmSans = DM_Sans({
 });
 
 const siteUrl = "https://anishbabbar.me";
+const DESCRIPTION =
+  "Full-stack developer and team lead at Masters' Union, leading 10+ engineers. I build React, Node.js and AWS tools for leads, inventory, payments and travel.";
+const OG_ALT = "Anish Babbar, full-stack developer and team lead at Masters' Union";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,12 +26,11 @@ export const metadata: Metadata = {
     default: "Anish Babbar · Full-stack developer and team lead",
     template: "%s | Anish Babbar",
   },
-  description:
-    "Full-stack developer and team lead with 5+ years of experience building scalable, high-performance applications using React, Node.js, Express, AWS, and TypeScript. Currently leading 10+ engineers at Masters' Union.",
+  description: DESCRIPTION,
   keywords: [
     "Anish Babbar", "Full-Stack Developer", "Team Lead", "React Developer",
     "Node.js Developer", "Software Engineer", "AWS", "TypeScript",
-    "Portfolio", "Jalandhar", "India", "Masters Union",
+    "Portfolio", "Abohar", "Punjab", "India", "Masters Union",
   ],
   authors: [{ name: "Anish Babbar", url: siteUrl }],
   creator: "Anish Babbar",
@@ -38,13 +40,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     title: "Anish Babbar · Full-stack developer and team lead",
-    description: "Full-stack developer with 5+ years building scalable apps with React, Node.js, and AWS. Leading 10+ engineers at Masters' Union.",
+    description: DESCRIPTION,
     siteName: "Anish Babbar Portfolio",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: OG_ALT }],
   },
   twitter: {
     card: "summary_large_image",
+    images: [{ url: "/og.png", alt: OG_ALT }],
     title: "Anish Babbar · Full-stack developer and team lead",
-    description: "Full-stack developer with 5+ years building scalable apps with React, Node.js, and AWS.",
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
@@ -65,6 +69,10 @@ export default function RootLayout({
     >
       <head>
         <ThemeScript />
+        {/* Without JavaScript, entrance animations never run: show everything as final */}
+        <noscript>
+          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}[style*="clip-path"]{clip-path:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-screen overflow-x-hidden">
         {children}

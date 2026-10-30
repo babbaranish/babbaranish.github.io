@@ -12,6 +12,7 @@ import {
   Search,
   SunMoon,
   Terminal,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -292,28 +293,40 @@ export default function CommandPalette() {
                 setSelected(0);
               }}
               placeholder="Type a command or file"
-              className="h-full flex-1 bg-transparent text-[14px] text-fg outline-none placeholder:text-fg-muted"
+              aria-label="Search files and commands"
+              className="h-full flex-1 bg-transparent text-[16px] text-fg outline-none placeholder:text-fg-muted md:text-[14px]"
               role="combobox"
-              aria-expanded="true"
-              aria-controls="palette-list"
+              aria-expanded={flat.length > 0}
+              aria-controls={flat.length > 0 ? "palette-list" : undefined}
               aria-activedescendant={activeKey ? `palette-${activeKey}` : undefined}
             />
-            <kbd className="kbd">esc</kbd>
+            <button
+              type="button"
+              onClick={closePalette}
+              aria-label="Close command palette"
+              className="hidden h-8 w-8 items-center justify-center rounded-md text-fg-muted hover:bg-raised hover:text-fg [@media(hover:none)]:inline-flex"
+            >
+              <X size={16} strokeWidth={1.5} aria-hidden="true" />
+            </button>
+            <kbd className="kbd [@media(hover:none)]:hidden">esc</kbd>
           </div>
 
-          <ul
-            key={openCount}
-            id="palette-list"
-            role="listbox"
-            aria-label="Results"
-            className="max-h-[320px] overflow-y-auto p-2"
-          >
-            {flat.length === 0 && <li className="px-3 py-6 text-center text-[13px] text-fg-muted">No matches</li>}
-            {renderGroup("files", filtered.files, 0)}
-            {renderGroup("actions", filtered.actions, filtered.files.length)}
-          </ul>
+          {flat.length > 0 ? (
+            <ul
+              key={openCount}
+              id="palette-list"
+              role="listbox"
+              aria-label="Results"
+              className="max-h-[320px] overflow-y-auto p-2"
+            >
+              {renderGroup("files", filtered.files, 0)}
+              {renderGroup("actions", filtered.actions, filtered.files.length)}
+            </ul>
+          ) : (
+            <p className="px-3 py-6 text-center text-[13px] text-fg-muted">No matches</p>
+          )}
 
-          <div className="flex h-9 items-center gap-4 border-t border-hairline px-4 meta">
+          <div className="flex h-9 items-center gap-4 border-t border-hairline px-4 meta [@media(hover:none)]:hidden">
             <span>↑↓ to navigate</span>
             <span>↵ to run</span>
           </div>

@@ -12,7 +12,7 @@ interface Project {
   type: string;
   stack: string[];
   description: string;
-  githubUrl: string;
+  githubUrl?: string;
   liveUrl?: string;
 }
 
@@ -40,7 +40,6 @@ const projects: Project[] = [
     stack: ["React Native", "Expo SDK 54", "Zustand", "Expo Router"],
     description:
       "iOS and Android fitness and shopping app with social feeds, video reels, diet planning, a supplement marketplace and role-based access.",
-    githubUrl: "https://github.com/babbaranish/reaux-mobile",
   },
 ];
 
@@ -132,16 +131,18 @@ export default function Projects() {
                       <ArrowUpRight size={16} strokeWidth={1.5} className={arrowClass} />
                     </a>
                   )}
-                  <a
-                    className="group/btn btn btn-secondary btn-sm"
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    source
-                    <span className="sr-only"> for {project.name}</span>
-                    <ArrowUpRight size={16} strokeWidth={1.5} className={arrowClass} />
-                  </a>
+                  {project.githubUrl && (
+                    <a
+                      className="group/btn btn btn-secondary btn-sm"
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      source
+                      <span className="sr-only"> for {project.name}</span>
+                      <ArrowUpRight size={16} strokeWidth={1.5} className={arrowClass} />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             </motion.li>

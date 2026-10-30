@@ -40,11 +40,14 @@ export function CountUp({ value, className }: CountUpProps) {
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
   const match = value.match(/^([^\d]*)([\d,]+)(.*)$/);
   const target = match ? Number(match[2].replace(/,/g, "")) : 0;
-  const count = useMotionValue(0);
+  // Starts at the final value so the static HTML, crawlers and agents see the real number;
+  // it only drops to 0 in the browser right before the count-up plays.
+  const count = useMotionValue(target);
   const text = useTransform(count, (v) => Math.round(v).toLocaleString("en-US"));
 
   useEffect(() => {
     if (!inView || !match) return;
+    count.set(0);
     const controls = animate(count, target, { duration: 1, ease: EASE });
     return () => controls.stop();
   }, [inView, target, count, match]);
@@ -52,7 +55,8 @@ export function CountUp({ value, className }: CountUpProps) {
   if (!match) return <span className={className}>{value}</span>;
 
   return (
-    <span ref={ref} className={className} aria-label={value}>
+    <span ref={ref} className={className}>
+      <span className="sr-only">{value}</span>
       <span aria-hidden="true">
         {match[1]}
         <motion.span>{text}</motion.span>

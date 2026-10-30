@@ -29,14 +29,14 @@ export default function ThemeToggle() {
     return () => observer.disconnect();
   }, []);
 
-  if (!theme) return <div className="h-8 w-8" />;
+  if (!theme) return <div className="h-10 w-10" />;
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
       aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-hairline-strong text-fg-muted transition-colors hover:bg-raised hover:text-fg"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline-strong text-fg-muted transition-colors hover:bg-raised hover:text-fg"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
