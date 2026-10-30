@@ -1,92 +1,81 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Code2, Users, Rocket, Zap } from "lucide-react";
+import { Fragment, useRef } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import Section from "./Section";
+import { Reveal } from "./motion";
+import { K } from "./code";
 
-const stats = [
-  { value: "5+", label: "Years Building Web & Mobile Apps", icon: Code2 },
-  { value: "10+", label: "Developers Managed as Team Lead", icon: Users },
-  { value: "5+", label: "Products Shipped to Production", icon: Rocket },
-  { value: "1000+", label: "Users Across Internal Tools", icon: Zap },
-];
+const INTRO =
+  "I started in operations at Infosys, automating job schedules, and moved into building the software myself.";
+const WORDS = INTRO.split(" ");
+
+// One word that fades from 20% to 100% opacity across its slice of scroll progress
+function Word({
+  children,
+  progress,
+  range,
+}: {
+  children: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}) {
+  const opacity = useTransform(progress, range, [0.2, 1]);
+  return <motion.span style={{ opacity }}>{children}</motion.span>;
+}
 
 export default function About() {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.85", "end 0.45"],
+  });
+
   return (
-    <section id="about" className="px-6 md:px-16 lg:px-24 py-10">
-      {/* Section label */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="flex items-center gap-3 mb-6"
-      >
-        <div className="h-[1px] w-8" style={{ background: "var(--accent)" }} />
-        <span
-          className="text-[11px] uppercase tracking-[4px] font-medium"
-          style={{ fontFamily: "var(--font-mono)", color: "var(--accent)" }}
+    <Section id="about" title="About">
+      <div className="max-w-[44rem]">
+        <p className="text-[13px]">
+          <K># </K>
+          <span className="text-fg">About</span>
+        </p>
+        <p
+          ref={ref}
+          className="relative mt-6 text-[24px] font-medium leading-[34px] tracking-[-0.01em] text-fg sm:text-[30px] sm:leading-[40px]"
         >
-          About
-        </span>
-      </motion.div>
-
-      {/* Main text */}
-      <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.4] font-medium tracking-[-0.015em] max-w-6xl"
-        style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
-      >
-        I build products that{" "}
-        <span style={{ color: "var(--accent)" }}>scale</span>.
-        From architecting full-stack platforms to leading engineering teams,
-        I turn complex problems into{" "}
-        <span className="relative inline-block">
-          clean, production-ready code
-          <span className="absolute bottom-0 left-0 w-full h-[2px]" style={{ background: "var(--accent)", opacity: 0.3 }} />
-        </span>.
-      </motion.p>
-
-      {/* Stats grid */}
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {stats.map((stat, i) => {
-          const Icon = stat.icon;
-          return (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative p-6 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover-card"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              <Icon
-                size={18}
-                strokeWidth={1.5}
-                className="mb-4 transition-colors duration-300"
-                style={{ color: "var(--text-faint)" }}
-              />
-              <p
-                className="text-[36px] font-bold leading-none tracking-tight"
-                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
-              >
-                {stat.value}
-              </p>
-              <p
-                className="text-[12px] mt-2 uppercase tracking-[1.5px]"
-                style={{ color: "var(--text-muted)" }}
-              >
-                {stat.label}
-              </p>
-            </motion.div>
-          );
-        })}
+          <span className="sr-only">{INTRO}</span>
+          <span aria-hidden="true" className="tok-c">
+            &gt;{" "}
+          </span>
+          <span aria-hidden="true">
+            {WORDS.map((word, i) => (
+              <Fragment key={i}>
+                <Word
+                  progress={scrollYProgress}
+                  range={[i / WORDS.length, (i + 1) / WORDS.length]}
+                >
+                  {word}
+                </Word>
+                {i < WORDS.length - 1 ? " " : null}
+              </Fragment>
+            ))}
+          </span>
+        </p>
+        <Reveal delay={0.1}>
+          <p className="prose-text mt-6 text-[16px] leading-[26px]">
+            Today I lead a team of 10+ engineers at Masters&apos; Union, working
+            mostly in React, Node.js and AWS.
+          </p>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <p className="mt-8 text-[13px] text-fg-muted">
+            <K>---</K>
+          </p>
+          <p className="mt-2 text-[13px]">
+            <span className="text-accent">$</span>{" "}
+            <span className="text-fg-secondary">cat about.md</span>
+          </p>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

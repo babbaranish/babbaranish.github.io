@@ -1,142 +1,160 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { EASE } from "./motion";
 
-const rings = [
-  { size: 340, duration: 35, direction: 1 },
-  { size: 240, duration: 25, direction: -1 },
-  { size: 150, duration: 18, direction: 1 },
+const items = [
+  {
+    name: "Lead Matrix",
+    detail: "Lead capture, tracking and distribution",
+    when: "2025",
+  },
+  {
+    name: "Inventory management",
+    detail: "Company-wide, with real-time asset tracking",
+    when: "2025",
+  },
+  {
+    name: "Orbit",
+    detail: "Tasks, finance, inventory and travel in one platform",
+    when: "2023–25",
+  },
+  {
+    name: "Travel management",
+    detail: "1,500+ requests handled",
+    when: "2023–25",
+  },
+  {
+    name: "GetPrepped",
+    detail: "Mentoring app, published on Google Play",
+    when: "2023–25",
+  },
+  {
+    name: "Leadership reporting tool",
+    detail: "Built with Redux, cut manual work by 40%",
+    when: "2023",
+  },
 ];
 
-const orbitItems = [
-  // Outer ring
-  { label: "React", icon: "⚛", ring: 0, angle: 0, color: "#61dafb" },
-  { label: "Node", icon: "⬢", ring: 0, angle: 120, color: "#68a063" },
-  { label: "AWS", icon: "☁", ring: 0, angle: 240, color: "#ff9900" },
-  // Middle ring
-  { label: "TS", icon: "TS", ring: 1, angle: 45, color: "#3178c6" },
-  { label: "Next", icon: "▲", ring: 1, angle: 165, color: "var(--text-primary)" },
-  { label: "Git", icon: "⎇", ring: 1, angle: 285, color: "#f05032" },
-  // Inner ring
-  { label: "SQL", icon: "◈", ring: 2, angle: 90, color: "#e48900" },
-  { label: "Redux", icon: "↻", ring: 2, angle: 270, color: "#764abc" },
-];
+const COMMAND = "git log --oneline --author=anish";
+const SPINNER = ["⠋", "⠙", "⠹", "⠸"];
 
-function getXY(angle: number, radius: number) {
-  const r = (angle * Math.PI) / 180;
-  return { x: Math.cos(r) * radius, y: Math.sin(r) * radius };
-}
+// Timings in ms, each step counted from the start of its phase
+const START_DELAY = 700;
+const CHAR_DELAY = 35;
+const SPIN_STEP = 90;
+const WORKING_TIME = 360;
+const ROW_STEP = 110;
+
+// idle -> typing -> working -> rows -> done
+type Phase = "idle" | "typing" | "working" | "rows" | "done";
 
 export default function HeroVisual() {
-  const cx = 190;
+  const reduce = useReducedMotion() === true;
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [typedChars, setTypedChars] = useState(0);
+  const [spinFrame, setSpinFrame] = useState(0);
+  const [rowsShown, setRowsShown] = useState(0);
+
+  // One timer per step of the current phase; all are cleared on phase change and unmount
+  useEffect(() => {
+    if (reduce) return;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const later = (ms: number, fn: () => void) => {
+      timers.push(setTimeout(fn, ms));
+    };
+
+    switch (phase) {
+      case "idle":
+        later(START_DELAY, () => setPhase("typing"));
+        break;
+      case "typing":
+        for (let i = 1; i <= COMMAND.length; i++) {
+          later(i * CHAR_DELAY, () => setTypedChars(i));
+        }
+        later(COMMAND.length * CHAR_DELAY, () => setPhase("working"));
+        break;
+      case "working":
+        for (let i = 1; i < SPINNER.length; i++) {
+          later(i * SPIN_STEP, () => setSpinFrame(i));
+        }
+        later(WORKING_TIME, () => setPhase("rows"));
+        break;
+      case "rows":
+        for (let i = 0; i < items.length; i++) {
+          later(i * ROW_STEP, () => setRowsShown(i + 1));
+        }
+        later(items.length * ROW_STEP, () => setPhase("done"));
+        break;
+      case "done":
+        break;
+    }
+
+    return () => timers.forEach(clearTimeout);
+  }, [phase, reduce]);
+
+  // Reduced motion: skip straight to the final state
+  const chars = reduce ? COMMAND.length : typedChars;
+  const commandLive = !reduce && (phase === "idle" || phase === "typing");
+  const showWorking = !reduce && phase === "working";
+  const rowCount = reduce ? items.length : rowsShown;
+  const showPrompt = reduce || phase === "done";
 
   return (
-    <div className="relative w-full flex items-center justify-center" style={{ height: 400 }}>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="relative"
-        style={{ width: 380, height: 380 }}
-      >
-        {/* Rings + their orbiting icons */}
-        {rings.map((ring, ri) => {
-          const items = orbitItems.filter((o) => o.ring === ri);
-          return (
-            <motion.div
-              key={ri}
-              className="absolute"
-              style={{
-                width: ring.size,
-                height: ring.size,
-                top: cx - ring.size / 2,
-                left: cx - ring.size / 2,
-              }}
-              animate={{ rotate: 360 * ring.direction }}
-              transition={{ duration: ring.duration, repeat: Infinity, ease: "linear" }}
-            >
-              {/* Ring border */}
-              <div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  border: ri === 2 ? "1px solid var(--border-hover)" : "1px dashed var(--border)",
-                }}
-              />
-
-              {/* Icons on this ring — counter-rotate to stay upright */}
-              {items.map((item, ii) => {
-                const pos = getXY(item.angle, ring.size / 2);
-                return (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      rotate: -360 * ring.direction,
-                    }}
-                    transition={{
-                      opacity: { delay: 0.8 + ri * 0.2 + ii * 0.1, duration: 0.4 },
-                      scale: { delay: 0.8 + ri * 0.2 + ii * 0.1, duration: 0.4, ease: "backOut" },
-                      rotate: { duration: ring.duration, repeat: Infinity, ease: "linear" },
-                    }}
-                    className="absolute flex items-center justify-center"
-                    style={{
-                      width: 38,
-                      height: 38,
-                      top: ring.size / 2 + pos.y - 19,
-                      left: ring.size / 2 + pos.x - 19,
-                      zIndex: 10,
-                    }}
-                  >
-                    <div
-                      className="w-full h-full rounded-xl flex items-center justify-center font-bold cursor-default transition-transform duration-300 hover:scale-125"
-                      style={{
-                        background: "var(--bg-card)",
-                        border: "1px solid var(--border)",
-                        boxShadow: "var(--shadow-md)",
-                        color: item.color,
-                        fontFamily: item.icon.length > 1 ? "var(--font-mono)" : undefined,
-                        fontSize: item.icon.length > 1 ? 11 : 16,
-                      }}
-                      title={item.label}
-                    >
-                      {item.icon}
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          );
-        })}
-
-        {/* Center glow */}
-        <div
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            width: 80,
-            height: 80,
-            top: cx - 40,
-            left: cx - 40,
-            background: "radial-gradient(circle, var(--accent-medium) 0%, transparent 70%)",
-          }}
-        />
-
-        {/* Center dot */}
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            width: 12,
-            height: 12,
-            top: cx - 6,
-            left: cx - 6,
-            background: "var(--accent)",
-            boxShadow: "0 0 20px rgba(255,107,53,0.4)",
-          }}
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
-    </div>
+    <figure
+      aria-label="Selected things Anish has shipped"
+      className="min-w-0 overflow-hidden rounded-lg border border-hairline-strong bg-card"
+    >
+      <div className="flex h-9 items-center justify-between border-b border-hairline px-4">
+        <span className="meta">terminal</span>
+        <span className="meta">zsh</span>
+      </div>
+      <div className="p-4 text-[13px] leading-6">
+        <div aria-hidden="true">
+          <p>
+            <span className="text-accent">$</span> <span className="text-fg">{COMMAND.slice(0, chars)}</span>
+            {commandLive && <span className="caret" />}
+          </p>
+          {showWorking && (
+            <p>
+              <span className="text-accent">{SPINNER[spinFrame]}</span>
+              <span className="text-fg-muted"> reading history</span>
+            </p>
+          )}
+          <ol className="mt-2">
+            {items.slice(0, rowCount).map((item) => (
+              <motion.li
+                key={item.name}
+                className="grid grid-cols-[64px_minmax(0,1fr)] gap-3"
+                initial={reduce ? false : { opacity: 0, x: -4 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, ease: EASE }}
+              >
+                <span className="tok-n tabular-nums">{item.when}</span>
+                <span>
+                  <span className="tok-f">{item.name}</span> <span className="text-fg-secondary">{item.detail}</span>
+                </span>
+              </motion.li>
+            ))}
+          </ol>
+          {showPrompt && (
+            <p className="mt-2">
+              <span className="text-accent">$</span> <span className="caret" />
+            </p>
+          )}
+        </div>
+        <div className="sr-only">
+          <p>$ {COMMAND}</p>
+          <ul>
+            {items.map((item) => (
+              <li key={item.name}>
+                {item.when}, {item.name}: {item.detail}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </figure>
   );
 }

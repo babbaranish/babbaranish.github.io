@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, ArrowUpRight } from "lucide-react";
+import Section from "./Section";
+import { C } from "./code";
+import { Reveal, CountUp, EASE } from "./motion";
 
 interface Role {
   title: string;
@@ -23,24 +25,24 @@ const companies: Company[] = [
     roles: [
       {
         title: "Team Lead",
-        date: "Jul 2025 — Present",
-        metric: { value: "10+", label: "Engineers" },
+        date: "Jul 2025 – Present",
+        metric: { value: "10+", label: "engineers on the team" },
         highlights: [
-          "Managing team of developers across multiple product verticals",
-          "Architected Lead Matrix — lead capture, tracking & distribution system",
+          "Managing a team of developers across multiple product verticals",
+          "Architected Lead Matrix, a lead capture, tracking and distribution system",
           "Company-wide inventory management with real-time asset tracking",
-          "AI-powered development workflow with Cursor, Claude Code & Copilot",
+          "Set up an AI-assisted development workflow with Cursor, Claude Code and Copilot",
         ],
       },
       {
         title: "Software Developer",
-        date: "Aug 2023 — Jul 2025",
-        metric: { value: "95%", label: "Digital Adoption" },
+        date: "Aug 2023 – Jul 2025",
+        metric: { value: "95%", label: "digital payment adoption" },
         highlights: [
-          "Built Orbit — unified task, finance, inventory & travel platform",
-          "95% digital payment adoption across the organization",
-          "Published GetPrepped mentoring app on Google Play Store",
-          "Travel management system handling 1,500+ requests",
+          "Built Orbit, one platform for tasks, finance, inventory and travel",
+          "Drove digital payment adoption to 95% across the organization",
+          "Published the GetPrepped mentoring app on Google Play",
+          "Built a travel management system that has handled 1,500+ requests",
         ],
       },
     ],
@@ -51,21 +53,18 @@ const companies: Company[] = [
     roles: [
       {
         title: "Senior System Associate",
-        date: "Jan 2023 — Aug 2023",
-        metric: { value: "40%", label: "Less Manual Work" },
+        date: "Jan 2023 – Aug 2023",
+        metric: { value: "40%", label: "less manual work" },
         highlights: [
-          "React & Angular enterprise applications for clients",
-          "Built Redux reporting tool for leadership — 40% less manual work",
-          "Angular monitoring dashboard for mainframe job executions",
+          "Built React and Angular enterprise applications for clients",
+          "Built a Redux reporting tool for leadership that cut manual work by 40%",
+          "Built an Angular dashboard for monitoring mainframe job runs",
         ],
       },
       {
         title: "Operation Executive",
-        date: "Aug 2021 — Jan 2023",
-        highlights: [
-          "Automated recurring workflows using AutoSys job scheduling",
-          "Improved operational efficiency for enterprise operations",
-        ],
+        date: "Aug 2021 – Jan 2023",
+        highlights: ["Automated recurring workflows with AutoSys job scheduling"],
       },
     ],
   },
@@ -73,145 +72,100 @@ const companies: Company[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 md:px-16 lg:px-24 py-10">
-      {/* Section label */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="flex items-center gap-3 mb-6"
-      >
-        <div className="h-[1px] w-8" style={{ background: "var(--accent)" }} />
-        <span
-          className="text-[11px] uppercase tracking-[4px] font-medium"
-          style={{ fontFamily: "var(--font-mono)", color: "var(--accent)" }}
-        >
-          Experience
-        </span>
-      </motion.div>
+    <Section id="experience" title="Experience">
+      <p className="text-[13px]">
+        <span className="text-accent">$</span> <span className="text-fg">git log --graph --since=2021</span>
+      </p>
+      <p className="prose-text mt-3 max-w-[36rem]">
+        From automating operations at Infosys to leading a product team at Masters&apos; Union.
+      </p>
 
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-[-0.03em] mb-16"
-        style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)", lineHeight: 1.6 }}
-      >
-        Where I&apos;ve{" "}
-        <span style={{ color: "var(--accent)" }}>built things</span>
-      </motion.h2>
+      <div className="mt-10 flex flex-col gap-12">
+        {companies.map((c) => (
+          <div key={c.name}>
+            <Reveal className="flex items-baseline justify-between gap-4 border-b border-hairline pb-3">
+              <h3 className="text-[16px] font-medium text-fg">
+                <C>{"// "}</C>
+                {c.name}
+              </h3>
+              <span className="meta">{c.location}</span>
+            </Reveal>
 
-      {/* Companies */}
-      <div className="space-y-8">
-        {companies.map((company, ci) => (
-          <motion.div
-            key={company.name}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: ci * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl overflow-hidden"
-            style={{
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              boxShadow: "var(--shadow-sm)",
-            }}
-          >
-            {/* Company header */}
-            <div
-              className="flex items-center gap-4 px-6 md:px-8 py-5"
-              style={{ borderBottom: "1px solid var(--border)" }}
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: "var(--accent-soft)", border: "1px solid var(--border)" }}
-              >
-                <Building2 size={18} strokeWidth={1.5} style={{ color: "var(--accent)" }} />
-              </div>
-              <div>
-                <h3
-                  className="text-[18px] font-bold"
-                  style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
+            <ol className="mt-6">
+              {c.roles.map((r, i) => (
+                <motion.li
+                  key={r.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+                  transition={{ duration: 0.5, ease: EASE }}
+                  className="group relative grid grid-cols-[12px_minmax(0,1fr)] gap-x-5 pb-10 last:pb-0 lg:grid-cols-[12px_minmax(0,1fr)_160px]"
                 >
-                  {company.name}
-                </h3>
-                <p className="text-[12px]" style={{ color: "var(--text-muted)" }}>
-                  {company.location}
-                </p>
-              </div>
-            </div>
+                  {i < c.roles.length - 1 && (
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute left-[5.5px] top-3 -bottom-3 w-px origin-top bg-hairline-strong"
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+                      transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+                    />
+                  )}
+                  <motion.span
+                    aria-hidden="true"
+                    className="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-accent"
+                    initial={{ scale: 1, opacity: 0.8 }}
+                    whileInView={{ scale: 2.6, opacity: 0 }}
+                    viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+                    transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
+                  />
+                  <motion.span
+                    aria-hidden="true"
+                    className="relative z-10 mt-1.5 h-3 w-3 rounded-full border-2 border-accent bg-bg"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+                    transition={{ duration: 0.3, delay: 0.15, ease: EASE }}
+                  />
 
-            {/* Roles */}
-            <div>
-              {company.roles.map((role, ri) => (
-                <div
-                  key={role.title}
-                  className="group px-6 md:px-8 py-6 hover-role"
-                  style={{
-                    borderBottom: ri < company.roles.length - 1 ? "1px dashed var(--border)" : "none",
-                  }}
-                >
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h4
-                          className="text-[17px] font-bold"
-                          style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
-                        >
-                          {role.title}
-                        </h4>
-                        <ArrowUpRight
-                          size={14}
-                          strokeWidth={1.5}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{ color: "var(--accent)" }}
-                        />
-                      </div>
-                      <span
-                        className="text-[12px]"
-                        style={{ fontFamily: "var(--font-mono)", color: "var(--text-muted)" }}
-                      >
-                        {role.date}
-                      </span>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h4 className="text-[15px] leading-6 font-medium text-accent transition-colors">{r.title}</h4>
+                      <span className="meta transition-colors group-hover:text-fg-secondary">{r.date}</span>
                     </div>
-
-                    {/* Metric badge */}
-                    {role.metric && (
-                      <div
-                        className="flex items-center gap-2 px-4 py-2 rounded-full shrink-0"
-                        style={{
-                          background: "var(--accent-soft)",
-                          border: "1px solid var(--border)",
-                        }}
-                      >
-                        <span
-                          className="text-[18px] font-bold"
-                          style={{ fontFamily: "var(--font-display)", color: "var(--accent)" }}
+                    <ul className="mt-3 flex flex-col gap-1">
+                      {r.highlights.map((h, j) => (
+                        <motion.li
+                          key={h}
+                          initial={{ opacity: 0, x: -6 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: 0.2 + j * 0.06, ease: EASE }}
+                          className="prose-text flex gap-3"
                         >
-                          {role.metric.value}
-                        </span>
-                        <span className="text-[11px] uppercase tracking-[1px]" style={{ color: "var(--text-muted)" }}>
-                          {role.metric.label}
-                        </span>
-                      </div>
-                    )}
+                          <span aria-hidden="true" className="tok-c font-mono">
+                            -
+                          </span>
+                          <span className="min-w-0">{h}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Highlights */}
-                  <ul className="space-y-2 ml-0.5">
-                    {role.highlights.map((h, hi) => (
-                      <li key={hi} className="flex items-start gap-3 text-[14px] leading-[1.7]" style={{ color: "var(--text-secondary)" }}>
-                        <span className="mt-[9px] w-1 h-1 rounded-full shrink-0" style={{ background: "var(--accent)", opacity: 0.5 }} />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  {r.metric && (
+                    <div className="col-start-2 mt-4 lg:col-start-3 lg:row-start-1 lg:mt-0 lg:text-right">
+                      <p className="text-[40px] font-medium leading-none tracking-[-0.02em] tabular-nums tok-n">
+                        <CountUp value={r.metric.value} />
+                      </p>
+                      <p className="meta mt-2">{r.metric.label}</p>
+                    </div>
+                  )}
+                </motion.li>
               ))}
-            </div>
-          </motion.div>
+            </ol>
+          </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

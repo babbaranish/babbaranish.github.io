@@ -1,6 +1,6 @@
 /**
  * JSON-LD structured data for SEO.
- * All content is a hardcoded constant — no user input, safe.
+ * All content is a hardcoded constant, no user input, safe.
  */
 const JSONLD = JSON.stringify({
   "@context": "https://schema.org",

@@ -1,66 +1,59 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { EASE } from "./motion";
+
+type Theme = "light" | "dark";
+
+const readTheme = (): Theme =>
+  document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+
+// The page attribute is the single source of truth, so every toggle on the page
+// (sidebar, mobile header, command palette) stays in sync.
+export function toggleTheme() {
+  const next: Theme = readTheme() === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+}
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("theme") as "light" | "dark" | null;
-    const preferred = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    setTheme(preferred);
-    document.documentElement.setAttribute("data-theme", preferred);
+    const sync = () => setTheme(readTheme());
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
   }, []);
 
-  const toggle = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
-  };
-
-  if (!mounted) return <div className="w-10 h-10" />;
+  if (!theme) return <div className="h-8 w-8" />;
 
   return (
-    <motion.button
-      onClick={toggle}
-      className="relative w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
-      style={{
-        background: "var(--glass)",
-        border: "1px solid var(--border)",
-        backdropFilter: "blur(12px)",
-      }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      aria-label="Toggle theme"
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-hairline-strong text-fg-muted transition-colors hover:bg-raised hover:text-fg"
     >
-      <AnimatePresence mode="wait">
-        {theme === "dark" ? (
-          <motion.div
-            key="sun"
-            initial={{ rotate: -90, opacity: 0 }}
-            animate={{ rotate: 0, opacity: 1 }}
-            exit={{ rotate: 90, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Sun size={16} strokeWidth={1.5} style={{ color: "var(--text-muted)" }} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="moon"
-            initial={{ rotate: 90, opacity: 0 }}
-            animate={{ rotate: 0, opacity: 1 }}
-            exit={{ rotate: -90, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Moon size={16} strokeWidth={1.5} style={{ color: "var(--text-muted)" }} />
-          </motion.div>
-        )}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          className="inline-flex"
+          initial={{ opacity: 0, rotate: -45 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          exit={{ opacity: 0, rotate: 45 }}
+          transition={{ duration: 0.2, ease: EASE }}
+        >
+          {theme === "dark" ? (
+            <Sun size={16} strokeWidth={1.5} aria-hidden="true" />
+          ) : (
+            <Moon size={16} strokeWidth={1.5} aria-hidden="true" />
+          )}
+        </motion.span>
       </AnimatePresence>
-    </motion.button>
+    </button>
   );
 }
