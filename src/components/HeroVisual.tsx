@@ -110,7 +110,7 @@ export default function HeroVisual() {
         <span className="meta">terminal</span>
         <span className="meta">zsh</span>
       </div>
-      <div className="p-4 text-[13px] leading-6">
+      <div className="p-4 text-[12px] leading-6 sm:text-[13px]">
         <div aria-hidden="true">
           <p>
             <span className="text-accent">$</span> <span className="text-fg">{COMMAND.slice(0, chars)}</span>
@@ -139,7 +139,7 @@ export default function HeroVisual() {
                     <span className="tok-n tabular-nums">{item.when}</span>
                     <span>
                       <span className="tok-f">{item.name}</span>{" "}
-                      <span className="text-fg-secondary">{item.detail}</span>
+                      <span className="block text-fg-secondary">{item.detail}</span>
                     </span>
                   </motion.li>
                 );

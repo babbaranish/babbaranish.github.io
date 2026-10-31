@@ -129,7 +129,11 @@ export default function Hero() {
                 </>,
                 <>
                   {"  "}
-                  <P>role</P>: <S>{`"Full-stack developer and team lead"`}</S>,
+                  <P>role</P>: <S>{`"Full-stack developer"`}</S>,
+                </>,
+                <>
+                  {"  "}
+                  <P>title</P>: <S>{`"Team lead"`}</S>,
                 </>,
                 <>
                   {"  "}
@@ -141,8 +145,17 @@ export default function Hero() {
                 </>,
                 <>
                   {"  "}
-                  <P>builds</P>: [<S>{`"lead tracking"`}</S>, <S>{`"inventory"`}</S>, <S>{`"payments"`}</S>, <S>{`"travel"`}</S>],
+                  <P>builds</P>: [
                 </>,
+                <>
+                  {"    "}
+                  <S>{`"lead tracking"`}</S>, <S>{`"inventory"`}</S>,
+                </>,
+                <>
+                  {"    "}
+                  <S>{`"payments"`}</S>, <S>{`"travel"`}</S>,
+                </>,
+                <>{"  ],"}</>,
                 <>
                   {"  "}
                   <P>stack</P>: [<S>{`"React"`}</S>, <S>{`"Node.js"`}</S>, <S>{`"AWS"`}</S>],
@@ -182,7 +195,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={openPalette}
-              className="meta flex items-center gap-2 transition-colors hover:text-fg [@media(hover:none)]:hidden"
+              className="meta hidden items-center gap-2 transition-colors hover:text-fg md:flex [@media(hover:none)]:hidden"
             >
               or press <kbd className="kbd">⌘</kbd>
               <kbd className="kbd">K</kbd>
